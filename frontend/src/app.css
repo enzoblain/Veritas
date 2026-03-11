@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: #601F9E;
+}
+
+@layer base {
+  html, body { @apply p-0 m-0 w-full h-full }
+  body { font-family: Inter, sans-serif; }
+}
