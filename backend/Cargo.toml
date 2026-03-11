@@ -1,0 +1,3 @@
+[workspace]
+members = ["src/domain", "src/application", "src/infrastructure", "src/server"]
+resolver = "2"
