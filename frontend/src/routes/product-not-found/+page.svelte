@@ -4,20 +4,7 @@
   import { AnimatedGridPattern } from '$lib/components/magic/animated-grid-pattern';
   import { BlurFade } from '$lib/components/magic/blur-fade';
   import PulsatingButton from '$lib/components/magic/pulsating-button/pulsating-button.svelte';
-  import { initDarkModeObserver } from '$lib/utils/darkMode';
-  import { onMount } from 'svelte';
-
-  let isDark = $state(false);
-  let pulseColor = $state('oklch(0.145 0 0)');
-  let accentColor = $state('oklch(0.3 0 0)');
-
-  onMount(() => {
-    return initDarkModeObserver((dark) => {
-      isDark = dark;
-      pulseColor = dark ? 'oklch(0.985 0 0)' : 'oklch(0.145 0 0)';
-      accentColor = dark ? 'oklch(0.8 0 0)' : 'oklch(0.3 0 0)';
-    });
-  });
+	import { theme } from '$lib/components/stores/theme.svelte';
 </script>
 
 <section class="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background px-6 py-20">
@@ -37,7 +24,7 @@
     <BlurFade delay={0} duration={0.6} direction="up">
       <div class="flex flex-col items-center gap-1 text-center">
         <div class="mb-2 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/40 px-3 py-1 backdrop-blur-sm">
-          <span class="text-xs font-medium" style="background-color: {accentColor}und/70">Oops!</span>
+          <span class="text-xs font-medium" style="background-color: {theme.accentColor}und/70">Oops!</span>
           <div class="h-1 w-1 rounded-full bg-accent/50"></div>
         </div>
       </div>
@@ -61,7 +48,7 @@
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
         <a href="/" class="inline-block">
           <PulsatingButton
-            pulseColor={pulseColor}
+            pulseColor={theme.pulseColor}
             duration="2s"
             class="group gap-2 px-8 py-4 font-semibold shadow-lg hover:shadow-2xl hover:shadow-primary/40"
           >

@@ -2,15 +2,7 @@
   import { BlurFade } from '$lib/components/magic/blur-fade';
   import MagicCard from '$lib/components/magic/magic-card/magic-card.svelte';
   import { benefits } from '$lib/config/benefits';
-  import { initDarkModeObserver } from '$lib/utils/darkMode';
-
-  let isDarkMode = $state(false);
-
-  $effect(() => {
-    return initDarkModeObserver((isDark) => {
-      isDarkMode = isDark;
-    });
-  });
+	import { theme } from './stores/theme.svelte';
 </script>
 
 <section class="relative overflow-hidden bg-background px-6 py-12 sm:py-16">
@@ -36,9 +28,9 @@
             class="rounded-3xl border dark:border-white/20 border-black/20" 
             gradientSize={150} 
             gradientColor="#1a1a2e" 
-            gradientFrom={isDarkMode ? "#ffffff" : "#000000"}
-            gradientTo={isDarkMode ? "#cccccc" : "#333333"}
-            gradientOpacity={isDarkMode ? 0.7 : 0.1}>
+            gradientFrom={theme.gradientFrom}
+            gradientTo={theme.gradientTo}
+            gradientOpacity={theme.gradientOpacity}>
             <div class="p-8">
               <div class="mb-4 inline-flex rounded-lg border border-border/30 p-3">
                 <benefit.icon size={28} class="text-foreground" />
