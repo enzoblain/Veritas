@@ -62,7 +62,7 @@
     <BlurFade delay={0.3} duration={0.5} direction="up">
       <div class="mt-12 text-center">
         <a
-          href="mailto:businesses@veritas.io"
+          href="mailto:enzoblain@proton.me"
           class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:opacity-90 hover:shadow-lg"
         >
           Get in touch with our team

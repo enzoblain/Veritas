@@ -80,7 +80,7 @@
 
     <div class="flex items-center gap-3">
       <button
-        class="hidden h-10 cursor-pointer items-center gap-3 rounded-xl border border-border bg-card px-4 text-foreground/60 transition hover:bg-accent md:flex"
+        class="hidden h-10 cursor-pointer items-center gap-3 rounded-xl border border-border bg-card px-4 text-foreground/60 transition hover:bg-black/5 dark:hover:bg-accent md:flex"
         type="button"
         aria-label="Open command palette"
         title="Open command palette"
@@ -97,7 +97,7 @@
         href="https://github.com/enzoblain/Veritas"
         aria-label="Open GitHub repository"
         title="GitHub"
-        class="flex h-10 w-10 items-center justify-center rounded-xl text-foreground/70 transition hover:bg-accent hover:text-foreground"
+        class="flex h-10 w-10 items-center justify-center rounded-xl text-foreground/70 transition hover:bg-black/5 hover:text-foreground dark:hover:bg-accent dark:hover:text-foreground"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@
       </a>
 
       <AnimatedThemeToggler
-        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-foreground/70 transition hover:bg-accent hover:text-foreground"
+        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-foreground/70 transition hover:bg-black/5 hover:text-foreground dark:hover:bg-accent dark:hover:text-foreground"
         duration={450}
       />
     </div>

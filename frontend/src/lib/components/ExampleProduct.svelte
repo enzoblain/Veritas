@@ -1,7 +1,10 @@
 <script lang="ts">
   import { BlurFade } from '$lib/components/magic/blur-fade';
   import BorderBeam from '$lib/components/magic/border-beam/border-beam.svelte';
+  import DotPattern from '$lib/components/magic/dot-pattern/dot-pattern.svelte';
   import { CheckCircle2, MapPin, Truck, Clock } from 'lucide-svelte';
+  import { initDarkModeObserver } from '$lib/utils/darkMode';
+  import { onMount } from 'svelte';
 
   const productData = {
     name: 'Organic Carrot',
@@ -19,8 +22,21 @@
 
   let containerRef: HTMLElement | null = $state(null);
   let factRefs: (HTMLDivElement | null)[] = $state([null, null, null]);
+  let isDark = $state(false);
+  let beamColorFrom = $state('#3b3b3b');
+  let beamColorTo = $state('#3b3b3b');
+  let dotColor = $state('rgba(59, 59, 59, 0.5)');
 
   const initialPrice = 0.50;
+
+  onMount(() => {
+    return initDarkModeObserver((dark) => {
+      isDark = dark;
+      beamColorFrom = dark ? '#ffffff' : '#3b3b3b';
+      beamColorTo = dark ? '#ffffff' : '#3b3b3b';
+      dotColor = dark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(59, 59, 59, 0.2)';
+    });
+  });
 
   function getPriceMultiplier(priceStr: string): string {
     const price = parseFloat(priceStr.replace('$', ''));
@@ -72,8 +88,20 @@
     <div class="mt-16">
       <BlurFade delay={0.1} duration={0.5} direction="left">
         <div class="overflow-visible rounded-2xl border border-border/60 bg-gradient-to-b from-card/60 to-card/20 p-8 backdrop-blur-sm sm:p-10 relative">
-          <BorderBeam size={200} duration={12} delay={0} colorFrom="#ffffff" colorTo="#ffffff" />
-          <div class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <BorderBeam size={200} duration={12} delay={0} colorFrom={beamColorFrom} colorTo={beamColorTo} />
+          <div class="pointer-events-none absolute inset-0 rounded-2xl" aria-hidden="true">
+            <DotPattern
+              width={32}
+              height={32}
+              cx={2}
+              cy={2}
+              cr={2}
+              class="fill-current opacity-50"
+              style="color: {isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)'}; mask-image: radial-gradient(ellipse 80% 80% at center, white 0%, transparent 100%);"
+            />
+          </div>
+          <div class="relative z-10">
+            <div class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <div>
               <h3 class="text-2xl font-bold">{productData.name}</h3>
               <p class="mt-2 text-sm text-foreground/60">ID: <code class="text-foreground font-mono text-sm">{productData.verityId}</code></p>
@@ -146,6 +174,7 @@
                   </div>
                 {/if}
               </div>
+          </div>
           </div>
         </div>
       </BlurFade>
