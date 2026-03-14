@@ -13,7 +13,8 @@
     resetNavbarHistoryPreview,
     selectNavbarHistoryItem,
     submitNavbarPaletteSearch
-  } from '$lib/navbar-search';
+  } from '$lib/features/search/navbar';
+  import { timeAgo } from '$lib/utils/time';
 
   let isPaletteOpen = $state(false);
   let paletteId = $state('');
@@ -173,7 +174,7 @@
                 onclick={() => selectNavbarHistoryItem(paletteBindings, item)}
               >
                 <span class="text-sm font-medium">{item.id}</span>
-                <span class="text-xs text-foreground/55">{item.product} • {item.lastCheck}</span>
+                <span class="text-xs text-foreground/55">{item.product} • {timeAgo(item.lastCheck)}</span>
               </button>
             {/each}
           {/if}

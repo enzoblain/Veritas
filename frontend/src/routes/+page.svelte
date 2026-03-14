@@ -1,19 +1,22 @@
 <script lang="ts">
   import InteractiveHoverButton from '$lib/components/magic/interactive-hover-button/interactive-hover-button.svelte';
-  import ExampleProduct from '$lib/components/ExampleProduct.svelte';
   import Footer from '$lib/components/layout/Footer.svelte';
   import MagicCard from '$lib/components/magic/magic-card/magic-card.svelte';
-  import { benefits } from '$lib/config/benefits';
 	import { theme } from '$lib/stores/theme.svelte';
   import { BlurFade } from '$lib/components/magic/blur-fade';
   import { ArrowRight } from '@lucide/svelte';
   import { Factory, ChartColumn, Target } from '@lucide/svelte';
-  import { attachHomeSearchShortcuts } from '$lib/home-search';
+  import { attachHomeSearchShortcuts } from '$lib/features/search/home';
   import { ChevronRight } from '@lucide/svelte';
   import { steps } from '$lib/utils/steps';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+  import { Shield, BookOpen, Users, Lock } from '@lucide/svelte';
 	import AnimatedGridPattern from '$lib/components/magic/animated-grid-pattern/animated-grid-pattern.svelte';
+	import type { Product } from '$lib/types/product';
+	import { getMockProduct } from '$lib/services/product';
+	import ProductContent from '$lib/components/product/ProductContent.svelte';
+	import ProductBoxContainer from '$lib/components/product/ProductBoxContainer.svelte';
 
   let searchId = '';
   let searchInput: HTMLInputElement | null = null;
@@ -21,11 +24,6 @@
   function performSearch(): void {
     if (!searchId.trim()) return;
     goto(`/product/${searchId}`);
-  }
-
-  function loadExampleProduct(): void {
-    searchId = 'VRT-2024-001';
-    setTimeout(() => performSearch(), 100);
   }
 
   onMount(() => {
@@ -37,6 +35,35 @@
       }
     });
   });
+
+  interface Benefit {
+    icon: any;
+    title: string;
+    description: string;
+  }
+
+  const benefits: Benefit[] = [
+    {
+      icon: Shield,
+      title: 'Price Transparency',
+      description: 'See the exact price at every stage, from producer to retailer.'
+    },
+    {
+      icon: BookOpen,
+      title: 'Margin Visibility',
+      description: 'Understand how much each actor in the chain profits from the product.'
+    },
+    {
+      icon: Users,
+      title: 'Fair Value Ensured',
+      description: 'Consumers and producers make informed decisions based on real data.'
+    },
+    {
+      icon: Lock,
+      title: 'Immutable Pricing',
+      description: 'Blockchain-backed price history that cannot be altered or hidden.'
+    }
+  ];
 
   interface Feature {
     icon: any;
@@ -126,7 +153,7 @@
           </div>
           <p class="mt-4 text-center text-xs text-foreground/40">
             Try example: <button
-              onclick={loadExampleProduct}
+              onclick={() => goto(`/product/VRT-2024-001`)}
               class="font-semibold text-foreground underline transition cursor-pointer hover:text-foreground/80"
             >
               VRT-2024-001
@@ -229,7 +256,13 @@
     </div>
   </section>
 
-  <ExampleProduct />
+  <section class="relative overflow-hidden bg-background px-6 py-12 sm:py-16">
+    <div class="mx-auto max-w-5xl">
+      <ProductBoxContainer>
+        <ProductContent product={getMockProduct()} />
+      </ProductBoxContainer>
+    </div>
+  </section>
 
   <section class="relative overflow-hidden bg-background px-6 py-12 sm:py-16">
     <div class="mx-auto max-w-5xl">

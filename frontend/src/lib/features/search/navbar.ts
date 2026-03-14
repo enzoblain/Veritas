@@ -4,7 +4,7 @@ import { tick } from 'svelte';
 export type NavbarHistoryItem = {
     id: string;
     product: string;
-    lastCheck: string;
+    lastCheck: number;
 };
 
 type NavbarSearchBindings = {
@@ -22,13 +22,12 @@ type NavbarSearchBindings = {
 
 export const navbarLinks = [{ label: 'Home', href: '/' }];
 
-// To replace
 export const navbarHistoryItems: NavbarHistoryItem[] = [
-    { id: 'VRT-2026-00192', product: 'Smart Bottle', lastCheck: '2 min ago' },
-    { id: 'VRT-2026-00438', product: 'Travel Backpack', lastCheck: '15 min ago' },
-    { id: 'VRT-2026-00901', product: 'Coffee Grinder', lastCheck: '1 h ago' },
-    { id: 'VRT-2026-01077', product: 'Wireless Earbuds', lastCheck: 'Yesterday' },
-    { id: 'VRT-2026-01104', product: 'Carbon Wallet', lastCheck: 'Yesterday' }
+    { id: 'VRT-2026-00192', product: 'Smart Bottle', lastCheck: Date.now() - 2 * 60 * 1000 },
+    { id: 'VRT-2026-00438', product: 'Travel Backpack', lastCheck: Date.now() - 15 * 60 * 1000 },
+    { id: 'VRT-2026-00901', product: 'Coffee Grinder', lastCheck: Date.now() - 60 * 60 * 1000 },
+    { id: 'VRT-2026-01077', product: 'Wireless Earbuds', lastCheck: Date.now() - 24 * 60 * 60 * 1000 },
+    { id: 'VRT-2026-01104', product: 'Carbon Wallet', lastCheck: Date.now() - 24 * 60 * 60 * 1000 }
 ];
 
 export function getFilteredNavbarHistory(
