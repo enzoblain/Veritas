@@ -1,9 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { ChevronRight } from 'lucide-svelte';
+  import { ChevronRight } from '@lucide/svelte';
   import { AnimatedGridPattern } from '$lib/components/magic/animated-grid-pattern';
   import { BlurFade } from '$lib/components/magic/blur-fade';
-  import { theme } from '$lib/components/stores/theme.svelte';
+  import { theme } from '$lib/stores/theme.svelte'
   import PulsatingButton from '$lib/components/magic/pulsating-button/pulsating-button.svelte';
 
   let { title, message}: {

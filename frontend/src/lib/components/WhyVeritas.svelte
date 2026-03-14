@@ -1,8 +1,8 @@
 <script lang="ts">
   import { BlurFade } from '$lib/components/magic/blur-fade';
-  import MagicCard from '$lib/components/magic/magic-card/magic-card.svelte';
   import { benefits } from '$lib/config/benefits';
-	import { theme } from './stores/theme.svelte';
+	import { theme } from '../stores/theme.svelte';
+  import MagicCard from '$lib/components/magic/magic-card/magic-card.svelte';
 </script>
 
 <section class="relative overflow-hidden bg-background px-6 py-12 sm:py-16">

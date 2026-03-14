@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Github, Mail } from 'lucide-svelte';
+  import { Github, Mail } from '@lucide/svelte';
   import { BlurFade } from '$lib/components/magic/blur-fade';
 
   const currentYear = new Date().getFullYear();

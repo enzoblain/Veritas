@@ -1,4 +1,4 @@
-import { Shield, BookOpen, Users, Lock } from 'lucide-svelte';
+import { Shield, BookOpen, Users, Lock } from '@lucide/svelte';
 
 export const benefits = [
     {

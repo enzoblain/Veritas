@@ -2,9 +2,8 @@
   import { BlurFade } from '$lib/components/magic/blur-fade';
   import BorderBeam from '$lib/components/magic/border-beam/border-beam.svelte';
   import DotPattern from '$lib/components/magic/dot-pattern/dot-pattern.svelte';
-  import { CheckCircle2, MapPin, Truck, Clock } from 'lucide-svelte';
-  import { onMount } from 'svelte';
-	import { theme } from './stores/theme.svelte';
+  import { CheckCircle2, MapPin, Truck, Clock } from '@lucide/svelte';
+  import { theme } from '../stores/theme.svelte';
 
   const productData = {
     name: 'Organic Carrot',

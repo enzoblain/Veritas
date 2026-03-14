@@ -1,4 +1,4 @@
-import { Search, Eye, CheckCircle2 } from 'lucide-svelte';
+import { Search, Eye, CheckCircle2 } from '@lucide/svelte';
 
 export const steps = [
     {
