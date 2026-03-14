@@ -170,7 +170,7 @@
             {#each filteredHistory.slice(0, 5) as item, index (item.id)}
               <button
                 type="button"
-                class={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left transition ${activeHistoryIndex === index ? 'bg-accent text-foreground' : 'text-foreground/85 hover:bg-accent'}`}
+                class={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left transition ${activeHistoryIndex === index ? 'bg-foreground/10 text-foreground dark:bg-accent' : 'text-foreground/85 hover:bg-foreground/5 dark:hover:bg-accent'}`}
                 onclick={() => selectNavbarHistoryItem(paletteBindings, item)}
               >
                 <span class="text-sm font-medium">{item.id}</span>
