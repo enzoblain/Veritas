@@ -86,7 +86,7 @@
         title="Open command palette"
         onclick={() => void openNavbarPalette(paletteBindings)}
       >
-        <Search size={16} />
+        <Search size={24} />
         <span class="text-sm">Search ID...</span>
         <span class="ml-2 rounded-md border border-border bg-background px-2 py-0.5 text-xs text-foreground/45">
           Ctrl/Cmd K
