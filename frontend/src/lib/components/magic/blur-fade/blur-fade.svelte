@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { motion, AnimatePresence, type Variants } from "motion-sv";
-	import { cn } from "$lib/utils";
+	import { cn } from "$lib/utils/cn";
 	import type { Snippet } from "svelte";
 
 	type MarginType = string;

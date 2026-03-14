@@ -3,7 +3,6 @@ import { initDarkModeObserver } from '$lib/utils/theme';
 
 export const theme = $state({
     isDark: false,
-    pulseColor: 'oklch(0.145 0 0)',
     accentColor: 'oklch(0.3 0 0)',
     beamColorFrom: '#3b3b3b',
     beamColorTo: '#3b3b3b',
@@ -17,7 +16,6 @@ export function initTheme() {
     onMount(() => {
         return initDarkModeObserver((dark) => {
             theme.isDark = dark;
-            theme.pulseColor = dark ? 'oklch(0.985 0 0)' : 'oklch(0.145 0 0)';
             theme.accentColor = dark ? 'oklch(0.8 0 0)' : 'oklch(0.3 0 0)';
             theme.beamColorFrom = dark ? '#ffffff' : '#3b3b3b';
             theme.beamColorTo = dark ? '#ffffff' : '#3b3b3b';
