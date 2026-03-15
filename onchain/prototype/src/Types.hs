@@ -4,13 +4,16 @@ import Data.Time.Clock.POSIX (POSIXTime)
 
 type Actor = String
 
+type Creator = String
+
 type ProductId = String
 
 data Role = Producer | Distributor | Retailer deriving (Show, Enum, Eq)
 
 data Product = Product
   { pId :: ProductId,
-    pCreator :: Actor,
+    pName :: String,
+    pCreator :: Creator,
     pTimestamp :: POSIXTime
   }
   deriving (Show)

@@ -7,8 +7,8 @@ getPriceRecords :: ProductId -> State -> [PriceRecord]
 getPriceRecords pid s =
   filter (\pr -> prProductId pr == pid) (sPriceRecords s)
 
-getCurrentPrice :: ProductId -> State -> Maybe PriceRecord
-getCurrentPrice pid s =
+getCurrentPriceRecord :: ProductId -> State -> Maybe PriceRecord
+getCurrentPriceRecord pid s =
   case getPriceRecords pid s of
     [] -> Nothing
     (x : _) -> Just x
