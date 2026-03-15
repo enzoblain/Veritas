@@ -1,26 +1,47 @@
+# Rust
 target/
 Cargo.lock
 
-.DS_Store
-Thumbs.db
+# Haskell
+dist-newstyle
+dist
+*.hi
+*.o
+*.dyn_o
+*.dyn_hi
+cabal.project.local
+cabal.project.local~
+cabal.project.freeze
 
+# Nix
+result
+result-*
+.direnv
+.envrc
+
+# Node / frontend
 node_modules/
 .svelte-kit
 build/
+dist/
+.npm
+.pnpm-store
+.npmrc
 
+# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-.npm
-.pnpm-store
-dist/
-.npmrc
-
+# Logs
 *.log
 
+# Editors
 .vscode/
 
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
 *~
 \#*\#
-
-dist-newstyle

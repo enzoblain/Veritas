@@ -30,7 +30,6 @@ executable prototypes
     base >=4.14 && <5,
     bytestring,
     cryptonite,
-    random,
     time,
 
   hs-source-dirs: src
