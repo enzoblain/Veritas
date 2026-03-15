@@ -1,0 +1,55 @@
+name: Veritas CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "onchain/prototype/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "onchain/prototype/**"
+      - ".github/workflows/ci.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: 'latest'
+          cabal-version: 'latest'
+      
+      - name: Cache cabal packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cabal/store
+          key: ${{ runner.os }}-cabal-${{ hashFiles('**/cabal.project.local') }}
+          restore-keys: |
+            ${{ runner.os }}-cabal-
+      
+      - name: Cache cabal build
+        uses: actions/cache@v3
+        with:
+          path: onchain/prototype/dist-newstyle
+          key: ${{ runner.os }}-cabal-build-${{ hashFiles('onchain/prototype/prototypes.cabal') }}
+          restore-keys: |
+            ${{ runner.os }}-cabal-build-
+      
+      - name: Update cabal package list
+        run: cabal update
+      
+      - name: Build prototype
+        run: |
+          cd onchain/prototype
+          cabal build all
+      
+      - name: Run tests
+        run: |
+          cd onchain/prototype
+          cabal run prototypes
