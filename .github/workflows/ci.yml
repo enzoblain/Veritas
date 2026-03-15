@@ -22,7 +22,7 @@ jobs:
       - name: Setup Haskell
         uses: haskell-actions/setup@v2
         with:
-          ghc-version: 'latest'
+          ghc-version: '9.6.4'
           cabal-version: 'latest'
       
       - name: Cache cabal packages

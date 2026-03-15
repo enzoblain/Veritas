@@ -1,13 +1,15 @@
 module Utils where
 
+import Crypto.Hash (Blake2b_256, Digest, hash)
+import Data.ByteString.Char8 (pack)
 import Data.Time.Clock.POSIX (POSIXTime, getPOSIXTime)
-import Data.UUID (toString)
-import Data.UUID.V4 (nextRandom)
 
-generateId :: IO String
-generateId = do
-  uuid <- nextRandom
-  return ("VRT-" ++ toString uuid)
+generateId :: String -> IO String
+generateId seed = do
+  ts <- getTimestamp
+  let input = seed ++ show ts
+  let digest = hash (pack input) :: Digest Blake2b_256
+  return ("VRT-" ++ show digest)
 
 getTimestamp :: IO POSIXTime
 getTimestamp = getPOSIXTime

@@ -7,7 +7,7 @@ import Utils (generateId, getTimestamp)
 
 createProduct :: Creator -> String -> IO Product
 createProduct c n = do
-  pid <- generateId
+  pid <- generateId (c ++ n)
   ts <- getTimestamp
   return
     Product
