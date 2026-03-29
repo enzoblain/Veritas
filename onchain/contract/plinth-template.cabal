@@ -81,3 +81,16 @@ executable gen-minting-policy-blueprint
     , bytestring
     , containers
     , plinth-validators
+
+executable test
+  import:         ghc-only-options, plutus-deps
+  hs-source-dirs: app
+  main-is:        TestSuite.hs
+  build-depends:
+    , base
+    , bytestring
+    , containers
+    , plinth-validators
+    , plutus-ledger-api
+    , plutus-tx
+    , plutus-tx-plugin

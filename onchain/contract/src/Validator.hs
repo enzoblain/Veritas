@@ -1,0 +1,4 @@
+auctionTypedValidator ::
+  AuctionParams ->
+  ScriptContext ->
+  Bool
