@@ -1,4 +1,4 @@
-module TestSuite where
+module Main where
 
 import Actions (addPriceRecord, addProduct, createPriceRecord, createProduct)
 import Queries
@@ -106,3 +106,6 @@ runAllTests = do
                 case getCurrentPriceRecord pid finalState of
                   Just pr -> prAmount pr == 1200
                   Nothing -> False
+
+main :: IO ()
+main = runAllTests

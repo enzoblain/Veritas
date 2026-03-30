@@ -1,5 +1,5 @@
 cabal-version: 3.0
-name: prototype
+name: veritas
 version: 0.1.0.0
 -- synopsis:
 -- description:
@@ -15,22 +15,19 @@ extra-doc-files: CHANGELOG.md
 common warnings
   ghc-options: -Wall
 
-executable prototypes
+executable test
   import: warnings
-  main-is: Main.hs
-  other-modules:
-    Actions
-    Queries
-    State
-    Types
-    Utils
-
-  -- other-extensions:
-  build-depends:
-    base >=4.14 && <5,
-    bytestring,
-    cryptonite,
-    time,
-
+  main-is: TestSuite.hs
   hs-source-dirs: src
+  other-modules:
+      Actions
+      Queries
+      State
+      Types
+      Utils
+  build-depends:
+      base >= 4.14 && < 5
+    , bytestring
+    , cryptonite
+    , time
   default-language: Haskell2010

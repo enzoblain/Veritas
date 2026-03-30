@@ -5,26 +5,29 @@ on:
     branches: [ main ]
     paths:
       - "onchain/prototype/**"
+      - "onchain/contract/**"
       - ".github/workflows/ci.yml"
   pull_request:
     branches: [ main ]
     paths:
       - "onchain/prototype/**"
+      - "onchain/contract/**"
       - ".github/workflows/ci.yml"
 
 jobs:
-  test:
+
+  prototype-test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Haskell
         uses: haskell-actions/setup@v2
         with:
           ghc-version: '9.6.4'
           cabal-version: 'latest'
-      
+
       - name: Cache cabal packages
         uses: actions/cache@v3
         with:
@@ -32,24 +35,44 @@ jobs:
           key: ${{ runner.os }}-cabal-${{ hashFiles('**/cabal.project.local') }}
           restore-keys: |
             ${{ runner.os }}-cabal-
-      
+
       - name: Cache cabal build
         uses: actions/cache@v3
         with:
-          path: onchain/prototype/dist-newstyle
-          key: ${{ runner.os }}-cabal-build-${{ hashFiles('onchain/prototype/prototypes.cabal') }}
+          path: onchain/prototype/v1/dist-newstyle
+          key: ${{ runner.os }}-prototype-build-${{ hashFiles('onchain/prototype/v1/prototype.cabal') }}
           restore-keys: |
-            ${{ runner.os }}-cabal-build-
-      
-      - name: Update cabal package list
+            ${{ runner.os }}-prototype-build-
+
+      - name: Update cabal
         run: cabal update
-      
+
       - name: Build prototype
         run: |
-          cd onchain/prototype
+          cd onchain/prototype/v1
           cabal build all
-      
-      - name: Run tests
+
+      - name: Run prototype tests
         run: |
-          cd onchain/prototype
-          cabal run prototypes
+          cd onchain/prototype/v1
+          cabal run test | tee test-output.log
+          ! grep -q "\[FAIL\]" test-output.log
+
+  contract-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Nix
+        uses: cachix/install-nix-action@v27
+
+      - name: Enable cachix (IOG cache)
+        uses: cachix/cachix-action@v12
+        with:
+          name: iohk
+
+      - name: Enter nix and run tests
+        run: |
+          cd onchain/contract
+          nix develop --command cabal run test

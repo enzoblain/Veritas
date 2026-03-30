@@ -37,6 +37,7 @@ vite.config.ts.timestamp-*
 
 # Editors
 .vscode/
+.idea/
 
 # OS
 .DS_Store
