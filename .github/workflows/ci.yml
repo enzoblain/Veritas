@@ -4,13 +4,13 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "onchain/prototype/**"
+      - "onchain/prototypes**"
       - "onchain/contract/**"
       - ".github/workflows/ci.yml"
   pull_request:
     branches: [ main ]
     paths:
-      - "onchain/prototype/**"
+      - "onchain/prototypes**"
       - "onchain/contract/**"
       - ".github/workflows/ci.yml"
 
@@ -39,8 +39,8 @@ jobs:
       - name: Cache cabal build
         uses: actions/cache@v3
         with:
-          path: onchain/prototype/v1/dist-newstyle
-          key: ${{ runner.os }}-prototype-build-${{ hashFiles('onchain/prototype/v1/prototype.cabal') }}
+          path: onchain/prototypesv1/dist-newstyle
+          key: ${{ runner.os }}-prototype-build-${{ hashFiles('onchain/prototypesv1/prototype.cabal') }}
           restore-keys: |
             ${{ runner.os }}-prototype-build-
 
@@ -49,12 +49,12 @@ jobs:
 
       - name: Build prototype
         run: |
-          cd onchain/prototype/v1
+          cd onchain/prototypesv1
           cabal build all
 
       - name: Run prototype tests
         run: |
-          cd onchain/prototype/v1
+          cd onchain/prototypesv1
           cabal run test | tee test-output.log
           ! grep -q "\[FAIL\]" test-output.log
 
